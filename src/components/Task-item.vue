@@ -1,0 +1,169 @@
+<template>
+  <div>
+    <ul>
+      <li  @click.self="$emit('complete')" :class="className" >
+          {{ task.title }}
+        <i class="del" @click="$emit('remove')" :key="task.id">&times;</i>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+// import  '../assets/css/styles.css'
+export default {
+  name: "TaskItem",
+  props: ["task"],
+  computed: {
+    className() {
+      let classes = ['toggle'];
+      if (this.task.completed) {
+        classes.push('toggle-completed');
+      }
+      return classes.join(' ');
+    }
+  }
+};
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::selection {
+    background-color: white;
+    color: crimson;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #f9f9f9;
+    font-size: 17px;
+    transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    -webkit-transition: 0.2s;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    -ms-word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+ul li:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+ul li:hover {
+    background: #ddd;
+    border-radius: 0;
+}
+
+ul li.checked {
+    background: #f1f1f1;
+    color: rgb(91, 197, 100);
+    border-radius: 0;
+    border-bottom: 1px solid rgba(105, 168, 138, 0.5);
+}
+
+ul li.checked:before {
+    content: '✔';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+input {
+    margin: 0;
+    outline: unset;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #bfbfbf;
+}
+
+.header {
+    background-color: crimson;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+    border-radius: 7px 7px 0 0;
+}
+
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.del {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.del:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.myfont {
+    font-family: Rubik Moonrocks;
+}
+
+.add {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-style: normal;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.add:hover {
+    background-color: #bbb;
+}
+
+.wrapper {
+    max-width: 600px;
+    padding: 0;
+    margin: 125px auto;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.29);
+}
+
+@media screen and (max-width:600px) {
+    .container {
+        padding: 0;
+    }
+}
+</style>
+
